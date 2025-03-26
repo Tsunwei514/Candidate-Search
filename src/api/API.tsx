@@ -1,9 +1,11 @@
-const searchGithub = async () => {
+import { Candidate } from "../interfaces/Candidate.interface";
+
+const searchGithub = async (): Promise<Candidate[]> => {
   try {
     const start = Math.floor(Math.random() * 100000000) + 1;
     // console.log(import.meta.env);
     const response = await fetch(
-      `https://api.github.com/users?since=${start}`,
+      `https://api.github.com/users?since=${start.toString()}`,
       {
         headers: {
           Authorization: `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`,
@@ -11,7 +13,7 @@ const searchGithub = async () => {
       }
     );
     // console.log('Response:', response);
-    const data = await response.json();
+    const data = await response.json() as Candidate[];
     if (!response.ok) {
       throw new Error('invalid API response, check the network tab');
     }
@@ -23,21 +25,21 @@ const searchGithub = async () => {
   }
 };
 
-const searchGithubUser = async (username: string) => {
+const searchGithubUser = async (username: string): Promise<Candidate> => {
   try {
     const response = await fetch(`https://api.github.com/users/${username}`, {
       headers: {
         Authorization: `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`,
       },
     });
-    const data = await response.json();
+    const data = await response.json() as Candidate;
     if (!response.ok) {
       throw new Error('invalid API response, check the network tab');
     }
     return data;
   } catch (err) {
     // console.log('an error occurred', err);
-    return {};
+    return {} as Candidate;
   }
 };
 
