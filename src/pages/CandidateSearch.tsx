@@ -34,7 +34,9 @@ const CandidateSearch = () => {
 
   const handleSaveCandidate = () => {
     if (currentCandidate) {
-      setSavedCandidates([...savedCandidates, currentCandidate]);
+      const newSavedCandidates = [...savedCandidates, currentCandidate];
+      setSavedCandidates(newSavedCandidates);
+      localStorage.setItem('savedCandidates', JSON.stringify(newSavedCandidates));
       handleNextCandidate();
     }
   };
