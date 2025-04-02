@@ -7,3 +7,9 @@ interface ImportMetaEnv {
 interface ImportMeta {
     readonly env: ImportMetaEnv;
 }
+
+declare namespace NodeJS {
+    interface ProcessEnv {
+      PORT?: string; // Define PORT as an optional string
+    }
+  }
