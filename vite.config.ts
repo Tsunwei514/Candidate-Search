@@ -12,5 +12,6 @@ export default defineConfig({
   preview: {
     host: "0.0.0.0", // Expose the preview server to external connections
     port: parseInt(process.env.PORT ?? "4173", 10), // Use the PORT environment variable or default to 4173
+    allowedHosts: ['candidate-search-h9wt.onrender.com'], // Allow this host
   },
 });
